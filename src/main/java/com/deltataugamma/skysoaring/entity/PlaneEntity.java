@@ -1,3 +1,5 @@
+//Copyright (c) 2021 DeltaTauGamma
+
 package com.deltataugamma.skysoaring.entity;
 
 import net.minecraft.entity.EntityType;
@@ -10,3 +12,4 @@ public class  PlaneEntity extends MobEntity {
         super(type, worldIn);
     }
 }
+

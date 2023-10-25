@@ -1,3 +1,5 @@
+//Copyright (c) 2021 DeltaTauGamma
+
 package com.deltataugamma.skysoaring;
 
 import net.minecraft.block.Block;
