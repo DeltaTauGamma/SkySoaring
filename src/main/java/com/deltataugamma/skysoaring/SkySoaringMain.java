@@ -2,11 +2,16 @@
 
 package com.deltataugamma.skysoaring;
 
+import com.deltataugamma.skysoaring.entity.plane.PlaneEntity;
+import com.deltataugamma.skysoaring.entity.plane.PlaneEntityType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -40,15 +45,17 @@ public class SkySoaringMain
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+        PlaneEntityType.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(PlaneEntityType.Plane.get(), PlaneEntity.setCustomPlaneAttributes().create());
+        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -85,4 +92,5 @@ public class SkySoaringMain
             LOGGER.info("HELLO from Register Block");
         }
     }
+
 }

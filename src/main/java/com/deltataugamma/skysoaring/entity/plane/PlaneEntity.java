@@ -6,16 +6,17 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 
-public class  PlaneEntity extends BoatEntity {
+public class  PlaneEntity extends MobEntity {
 
-    public PlaneEntity(EntityType<? extends BoatEntity> type, World world) {
-        super(type, world);
+
+    protected PlaneEntity(EntityType<? extends MobEntity> type, World worldIn) {
+        super(type, worldIn);
     }
+
     // func_233666_p_() -> registers attributes
     public static AttributeModifierMap.MutableAttribute setCustomPlaneAttributes() {
         return MobEntity.func_233666_p_()
@@ -23,9 +24,10 @@ public class  PlaneEntity extends BoatEntity {
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 2.0D);
     }
 
-    @Override
+    //@Override
     protected int getXPPoints(PlayerEntity player) {
         return 50 + this.world.rand.nextInt(5);
     }
+
 }
 
